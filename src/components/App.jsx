@@ -22,7 +22,6 @@ export function App() {
   }, [itemContact]);
 
   const addContactList = data => {
-    console.log(data)
     const searchName = data.name.toLowerCase();
     itemContact.find(contact => contact.name.toLowerCase() === searchName)
       ? alert('contact is already in contacts')
@@ -30,8 +29,7 @@ export function App() {
   };
 
   const handleDelete = id => {
-    console.log(id)
-    dispatch(delItem(id));
+        dispatch(delItem(id));
   };
 
   
