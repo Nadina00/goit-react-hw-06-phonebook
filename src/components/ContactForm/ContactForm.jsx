@@ -3,11 +3,13 @@ import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import { Input, Btn } from './ContactForm.styled';
 
+
 export function ContactForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [id, setId] = useState('');
 
+  
   const handleChangeName = evt => {
     setName(evt.target.value);
     setId(nanoid());

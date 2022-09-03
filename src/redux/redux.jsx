@@ -1,16 +1,26 @@
-import {store} from '../redux/store'
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { combineReducers } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit";
+import {addItem, delItem, changeFilter}  from './action';
 
 
-const ADDCONT = createAction("items/add");
-const DELCONT = createAction("items/del");
+ const contactsReducer  = createReducer(
+  JSON.parse(window.localStorage.getItem('contacts')) ?? [],
+   {
+  [addItem]: (state, action) => [...state, action.payload],
+  [delItem]: (state, { payload }) =>
+  state.filter(contact => {
+        return contact.id !== payload;
+  }),
+},
+   )
 
-const itemsChengh = createReducer(0, {
-    [ADDCONT]: (state, action) => {return [...state, action.payload]},
-    [DELCONT]: (state, action) =>  {return state.filter(data => data.id !== action.payload.id)}},
-  );
 
+ const filterReducer  = createReducer('', {
+  [changeFilter]: (state, action) => action.payload
+})
 
-
-
+export default combineReducers({
+  items:contactsReducer,
+  filter: filterReducer 
+})
 
